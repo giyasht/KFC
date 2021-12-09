@@ -1,0 +1,118 @@
+.prod {
+  --primary: #e05d26;
+  --grey: #454545;
+  --lightgrey: #666;
+
+  /* height: 300px; */
+  width: 380px;
+  margin: 0px auto;
+  color: var(--grey);
+  line-height: 1.55;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  padding: 20px;
+
+  /* width: calc(280px+0.5vw); */
+}
+
+.recipe,
+.pizza-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: antiquewhite;
+}
+.pizza-box {
+  flex: 3 1 30ch;
+  /* height: calc(282px + 2vw); */
+  height: 200px;
+  overflow: hidden;
+}
+.pizza-box img {
+  max-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.recipe {
+  border: 2px solid var(--darkyellow);
+  border-radius: 25px;
+  overflow: hidden;
+}
+.recipe-content {
+  padding: 12px 24px;
+  flex: 4 1 40ch;
+}
+.recipe-tags {
+  margin: 0 -8px;
+}
+.recipe-tag {
+  display: inline-block;
+  margin: 8px;
+  font-size: 0.875em;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--primary);
+}
+.recipe-title {
+  margin: 0;
+  font-size: clamp(1.4em, 2.1vw, 2.1em);
+  font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+}
+.recipe-title span {
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+}
+.recipe-metadata {
+  margin: 0;
+}
+.recipe-rating {
+  padding: 12px 0px;
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  /* margin-left: 0; */
+}
+.recipe-rating span {
+  color: var(--grey);
+}
+.recipe-votes {
+  padding: 10px;
+  font-size: 0.825em;
+  font-style: italic;
+  color: var(--lightgrey);
+  display: inline;
+}
+.recipe-save {
+  display: flex;
+  align-items: center;
+  padding: 6px 14px 6px 12px;
+  border-radius: 4px;
+  border: 2px solid currentColor;
+  color: var(--primary);
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addcart{
+  border-radius: 25px;
+}
+
+.addcart:hover{
+  color:white;
+  background-color: #e05d26;
+}
+
+
+.try {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,191 @@
+import React, { useState, useEffect } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import Navbar from "./../../components/Navbar/Navbar";
+import Footer from "./../../components/Footer/Footer";
+import Product from "./../../components/Product/Product";
+import Error404 from './../../components/Error404/Error404'
+import "./Menu.css";
+import './style.css'
+import Loading from "../../components/Loading/Loading";
+import ReactPaginate from 'react-paginate';
+
+
+
+function Items({ currentItems }) {
+	return (
+	  <>
+		{ currentItems 	&& 	currentItems.map( function(product, i) {
+
+								const productProps = {
+									name:product.name, 
+									description:product.description, 
+									price:product.price, 
+									sold:product.sold, 
+									stock:product.stock,
+									photo:product.photo,
+								}
+
+								return(<Product key={i} {...productProps}/>)
+
+							})
+		
+		}
+	  </>
+	);
+}
+
+
+
+const Menu = () => {
+
+	let params = useParams();
+
+	const [data, setData] = useState([]);
+
+	const [isLoading , setLoading ] = useState(true);
+
+	useEffect(() => {
+
+		const getData = async () => {
+
+			try {
+	
+				if(params.category === "all"){
+	
+					const response = await fetch(`http://127.0.0.1:8000/api/products` , {
+						method: "GET",
+						headers: {
+							Accept: "application/json",
+							"Content-Type": "application/json",
+						},
+					})
+					const datanow = await response.json()
+	
+				if (datanow) {
+					setData(datanow)
+				}
+	
+				} else {
+	
+					const response = await fetch(`http://127.0.0.1:8000/api/products/${params.category}` , {
+						method: "GET",
+						headers: {
+							Accept: "application/json",
+							"Content-Type": "application/json",
+						},
+					})
+	
+					const datanow = await response.json()
+	
+					if (datanow) {
+						setData(datanow)
+					}
+				}
+				
+				setLoading(false)
+				
+			} catch (error) {
+				return console.log(error);
+			}
+		
+		}
+
+		// setLoading(params.loading)
+
+		getData()
+
+	}, [params])
+	
+	
+	// Pagination
+	const [currentItems, setCurrentItems] = useState([]);
+    const [pageCount, setPageCount] = useState(0);
+	const [itemOffset, setItemOffset] = useState(0);
+	const itemsPerPage = 5;
+
+	useEffect(() => {
+		// Fetch items from another resources.
+		const endOffset = itemOffset + itemsPerPage;
+		console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+		setCurrentItems(data.slice(itemOffset, endOffset));
+		setPageCount(Math.ceil(data.length / itemsPerPage));
+	}, [itemOffset, itemsPerPage, data]);
+
+	const handlePageClick = (event) => {
+		const newOffset = (event.selected * itemsPerPage) % data.length;
+		console.log(
+			`User requested page number ${event.selected}, which is offset ${newOffset}`
+		);
+		setItemOffset(newOffset);
+	};
+
+    return (
+        <>
+			<Navbar />
+			<div className="menubody" style={{display:"flex"}}>
+				<div className="sidebar">
+					<nav className="navv">
+						<ul>
+							<li>
+								<div className="sidebar-heading">K.F.C</div>
+							</li>
+							<li>
+								<NavLink to="/menu/burger" onClick={ () => setLoading(true)}>Burger</NavLink>
+							</li>
+							<li>
+								<NavLink to="/menu/pizza" onClick={ () => setLoading(true)}>Pizza</NavLink>
+							</li>
+							<li>
+								<NavLink to="/menu/snacks" onClick={ () => setLoading(true)}>Snacks</NavLink>
+							</li>
+							<li>
+								<NavLink to="/menu/beverages" onClick={ () => setLoading(true)}>Beverages</NavLink>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+				<div className="row prod-row" style={{backgroundColor:"var(--lightblack)"}}>
+					{
+
+						isLoading 	? 	<Loading/>	
+									
+									: (	(!data.error && data.length !== 0)  
+									    
+										?  	<>
+												<Items currentItems={currentItems} />
+												<ReactPaginate
+													breakLabel="..."
+													nextLabel="next >"
+													onPageChange={handlePageClick}
+													pageRangeDisplayed={5}
+													pageCount={pageCount}
+													previousLabel="< previous"
+													renderOnZeroPageCount={null}
+
+													// containerClassName={'pagination'}
+													// subContainerClassName={'pages pagination'}
+													// activeClassName={'active'}
+
+													breakClassName={'page-item'}
+													breakLinkClassName={'page-link'}
+													containerClassName={'pagination'}
+													pageClassName={'page-item'}
+													pageLinkClassName={'page-link'}
+													previousClassName={'page-item'}
+													previousLinkClassName={'page-link'}
+													nextClassName={'page-item'}
+													nextLinkClassName={'page-link'}
+													activeClassName={'active'}
+												/>
+											</>
+										: 	( <Error404/> ))
+					}
+				</div>
+			</div>
+			<Footer />
+        </>
+    );
+};
+
+export default Menu;
