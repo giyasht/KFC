@@ -56,7 +56,7 @@ exports.createProduct = async (req, res) => {
                 });
             }
 
-            const { name, description, price, category, stock} = fields
+            const { name, description, price, category, stock, photoUrl} = fields
 
             // console.log(category);
             if (!name) {
@@ -90,6 +90,7 @@ exports.createProduct = async (req, res) => {
             }
 
 
+
             const categoryObject = await Category.findOne({ name: fields.category})
 
             if (!categoryObject) {
@@ -110,6 +111,7 @@ exports.createProduct = async (req, res) => {
                 price: fields.price,
                 category: categoryObject._id,
                 stock: fields.stock,
+                photoUrl: fields.photoUrl,
             }
 
             let product = new Product(updatedFields);

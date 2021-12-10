@@ -39,9 +39,10 @@ export const addProduct = async (userId, token, product) => {
         formData.append('category', product.category)
         formData.append('stock', product.stock)
         formData.append('photo', product.photo)
+        formData.append('photoUrl', product.photoUrl)
 
 
-        // console.log(product.photo);
+        console.log(product.photoUrl);
         // console.log(formData);
         // ${API}
         const response = await axios.post(`${API}/product/create/${userId}`, formData ,{

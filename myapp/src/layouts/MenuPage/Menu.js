@@ -150,10 +150,10 @@ const Menu = () => {
 								}}>Pizza</NavLink>
 							</li>
 							<li>
-								<NavLink to="/menu/snacks" onClick={ () => {
+								<NavLink to="/menu/south indian" onClick={ () => {
 									setLoading(true)
 									setItemOffset(0)
-								}}>Snacks</NavLink>
+								}}>South Indian</NavLink>
 							</li>
 							<li>
 								<NavLink to="/menu/beverages" onClick={ () => {

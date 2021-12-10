@@ -56,7 +56,7 @@ const AddProductDb = () => {
             if (response.data.error) {
                 setValues({ ...values, error: response.data.error, success:false })
             }else{
-                setValues({ ...values, name:'', description:'', price:'', category:'', stock:'', photo:'', error:'', success:true });
+                setValues({ ...values, name:'', description:'', price:'', category:'', stock:'', photoUrl:'', error:'', success:true });
                 navigate('/admin/dashboard');
             }
 
