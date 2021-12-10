@@ -30,14 +30,20 @@
   /* height: calc(282px + 2vw); */
   height: 200px;
   overflow: hidden;
+  border-radius: 25px 25px 0px 0px;
+  border: 2px solid var(--darkyellow);
 }
 .pizza-box img {
   max-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  /* height: auto; */
+  height: 100%;
   object-fit: cover;
   object-position: 50% 50%;
+  border-radius: 25px 25px 0px 0px;
+  border: 2px solid var(--darkyellow);
+
 }
 .recipe {
   border: 2px solid var(--darkyellow);

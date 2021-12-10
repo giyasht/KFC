@@ -1,5 +1,6 @@
 import React from 'react'
 import LoadingSpin from "react-loading-spin";
+import './Loading.css'
 
 const Loading = () => {
     return (
@@ -10,7 +11,7 @@ const Loading = () => {
                 timingFunction="ease-in-out"
                 direction="alternate"
                 size="200px"
-                primaryColor="yellow"
+                primaryColor="var(--darkyellow)"
                 secondaryColor="#333"
                 numberOfRotationsInAnimation={2}
             />

@@ -14,6 +14,7 @@ import Developers from './layouts/Developers/Developers';
 
 import Menu from "./layouts/MenuPage/Menu";
 import Error404 from './components/Error404/Error404';
+import Loading from './components/Loading/Loading';
 
 const App = () => {
     
@@ -30,11 +31,12 @@ const App = () => {
                     {AdminRoutes}
 
 
-                    <Route exact path="/menu" element={<Menu />} />
+                    {/* <Route exact path="/menu" element={<Menu />} /> */}
                     <Route exact path="/menu/:category" element={<Menu />} />
                     
                     {/* test Urls */}
                     <Route exact path='/form' element={<Form />} />
+                    <Route exact path='/loader' element={<Loading />} />
                     <Route exact path='*' element={<Error404 />} />
                 </Routes>
             </BrowserRouter>

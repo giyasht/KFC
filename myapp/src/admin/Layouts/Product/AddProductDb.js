@@ -17,14 +17,14 @@ const AddProductDb = () => {
         description: "famous burger in india",
         price: "199",
         // category: "619cb6bddafcf9142ec6f52a",
-        category: "burger",
+        category: "south indian",
         stock: "100",
-        // photo: '',
+        photoUrl: '',
         error: "",
         success: false
     });
     // photo,
-    const {name, description, price, category, stock,  error, success} = values;
+    const {name, description, price, category, stock, photoUrl, error, success} = values;
 
     const { user, token } = isAuthenticated();
 
@@ -108,6 +108,10 @@ const AddProductDb = () => {
                         <div className="form-group">
                             <label className="form-control-label">Stock</label>
                             <input className="form-control" type="text" onChange={handleChange('stock')} value={stock} />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-control-label">Image URL</label>
+                            <input className="form-control" type="text" onChange={handleChange('photoUrl')} value={photoUrl} />
                         </div>
                         <div className="form-group">
                             <label className="form-control-label">Select Product Image</label>

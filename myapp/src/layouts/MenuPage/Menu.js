@@ -23,6 +23,7 @@ function Items({ currentItems }) {
 									sold:product.sold, 
 									stock:product.stock,
 									photo:product.photo,
+									photoUrl:product.photoUrl
 								}
 
 								return(<Product key={i} {...productProps}/>)
@@ -59,11 +60,14 @@ const Menu = () => {
 							"Content-Type": "application/json",
 						},
 					})
-					const datanow = await response.json()
+
+					var datanow;
+
+					if(response){
+						datanow = await response.json()
+					}
 	
-				if (datanow) {
-					setData(datanow)
-				}
+					!datanow.error ? setData(datanow) : setData([])
 	
 				} else {
 	
@@ -74,12 +78,16 @@ const Menu = () => {
 							"Content-Type": "application/json",
 						},
 					})
+
+					var datanow;
 	
-					const datanow = await response.json()
-	
-					if (datanow) {
-						setData(datanow)
+					if(response){
+						datanow = await response.json()
 					}
+	
+					console.log(datanow);
+
+					!datanow.error ? setData(datanow) : setData([])
 				}
 				
 				setLoading(false)
@@ -101,7 +109,7 @@ const Menu = () => {
 	const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
 	const [itemOffset, setItemOffset] = useState(0);
-	const itemsPerPage = 5;
+	const itemsPerPage = 6;
 
 	useEffect(() => {
 		// Fetch items from another resources.
@@ -130,16 +138,28 @@ const Menu = () => {
 								<div className="sidebar-heading">K.F.C</div>
 							</li>
 							<li>
-								<NavLink to="/menu/burger" onClick={ () => setLoading(true)}>Burger</NavLink>
+								<NavLink to="/menu/burger" onClick={ () => {
+									setLoading(true)
+									setItemOffset(0)
+								}}>Burger</NavLink>
 							</li>
 							<li>
-								<NavLink to="/menu/pizza" onClick={ () => setLoading(true)}>Pizza</NavLink>
+								<NavLink to="/menu/pizza" onClick={ () => {
+									setLoading(true)
+									setItemOffset(0)
+								}}>Pizza</NavLink>
 							</li>
 							<li>
-								<NavLink to="/menu/snacks" onClick={ () => setLoading(true)}>Snacks</NavLink>
+								<NavLink to="/menu/snacks" onClick={ () => {
+									setLoading(true)
+									setItemOffset(0)
+								}}>Snacks</NavLink>
 							</li>
 							<li>
-								<NavLink to="/menu/beverages" onClick={ () => setLoading(true)}>Beverages</NavLink>
+								<NavLink to="/menu/beverages" onClick={ () => {
+									setLoading(true)
+									setItemOffset(0)
+								}}>Beverages</NavLink>
 							</li>
 						</ul>
 					</nav>
@@ -150,17 +170,18 @@ const Menu = () => {
 
 						isLoading 	? 	<Loading/>	
 									
-									: (	(!data.error && data.length !== 0)  
+									: 	((!data.error && data.length !== 0)  
 									    
 										?  	<>
+												{console.log(data)}
 												<Items currentItems={currentItems} />
 												<ReactPaginate
 													breakLabel="..."
-													nextLabel="next >"
+													nextLabel="Next >"
 													onPageChange={handlePageClick}
 													pageRangeDisplayed={5}
 													pageCount={pageCount}
-													previousLabel="< previous"
+													previousLabel="< Previous"
 													renderOnZeroPageCount={null}
 
 													// containerClassName={'pagination'}

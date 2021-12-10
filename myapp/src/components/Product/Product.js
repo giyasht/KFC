@@ -4,7 +4,7 @@ import burger from './../../images/burger.jpg'
 
 const Product = (props) => {
 
-	const {name, description, price, sold, stock, photo} = props
+	const {name, description, price, sold, stock, photo, photoUrl} = props
 
 	var img, binarystring;
 	
@@ -31,7 +31,10 @@ const Product = (props) => {
 			<article className="recipe">
 				<div className="pizza-box">
 					{
-						photo ? <img src={img} alt="" /> : <img src={burger} alt="" />
+
+						!photoUrl 	? 	(photo ? <img src={img} alt="" /> : <img src={burger} alt="" />)
+									:	(<img src={photoUrl} alt="" />)
+						
 					}
 					
 				</div>

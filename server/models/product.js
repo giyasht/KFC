@@ -7,7 +7,7 @@ var productSchema = new mongoose.Schema(
             type: String,
             trim: true,
             required: true,
-            maxlength: 32,
+            maxlength: 100,
         },
 
         description: {
@@ -42,6 +42,11 @@ var productSchema = new mongoose.Schema(
         photo: {
             data: Buffer,
             contentType: String,
+        },
+
+        photoUrl: {
+            type: String,
+            trim: true,
         }
     },
     
